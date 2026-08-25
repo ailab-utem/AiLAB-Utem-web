@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono } from "next/font/google";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import "./globals.css";
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 const navLinks = [
-  { href: "#pilares", label: "Quiénes somos" },
+  { href: "/#pilares", label: "Quiénes somos" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/talleres", label: "Talleres" },
   { href: "/recursos", label: "Recursos" },
@@ -33,8 +34,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="es" className={`${archivo.variable} ${jetbrainsMono.variable}`}>
       <body className="flex min-h-screen flex-col border-[6px] border-smoky bg-paper font-mono text-[13px] leading-[1.6] text-ink-200">
         <header className="flex h-[64px] items-stretch bg-smoky text-white">
-          <a
-            href="#top"
+          <Link
+            href="/#top"
             className="flex min-w-[120px] flex-col justify-center border-r border-[#2A2A2A] px-[24px] no-underline"
           >
             <span className="font-hero text-[22px] font-black uppercase leading-none tracking-[-0.03em] text-white">
@@ -43,7 +44,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <span className="font-mono text-[10px] font-medium leading-none tracking-[0.42em] text-ink-400">
               UTEM
             </span>
-          </a>
+          </Link>
           <div className="flex items-center border-r border-[#2A2A2A] px-[18px] font-mono text-sm font-medium leading-none text-ink-300">
             ⋮
           </div>
@@ -58,12 +59,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     /
                   </span>
                 )}
-                <a
+                <Link
                   href={link.href}
                   className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-white no-underline"
                 >
                   {link.label}
-                </a>
+                </Link>
               </span>
             ))}
           </nav>
@@ -76,12 +77,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </span>
           </div>
           <div className="flex items-center border-l border-[#2A2A2A] px-[16px]">
-            <a
+            <Link
               href="/contacto"
               className="flex h-[36px] items-center gap-[10px] bg-limerick px-[18px] font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky no-underline hover:bg-lavender"
             >
               Unirse al lab <span>↗</span>
-            </a>
+            </Link>
           </div>
           <div className="flex items-center border-l border-[#2A2A2A] px-[16px] font-mono text-sm font-medium leading-none text-ink-400">
             ⋮

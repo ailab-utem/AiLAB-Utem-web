@@ -175,7 +175,7 @@ export default function HomePage() {
 
       <section className="flex items-center justify-between gap-[32px] px-[32px] py-[28px]">
         <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[0.14em] text-ink-400">
-          //END_TRANSMISSION
+          {"//END_TRANSMISSION"}
         </span>
         <span className="h-px flex-1 bg-ink-600" />
         <span className="font-mono text-[10px] font-medium leading-none tracking-[0.08em] text-ink-300">
