@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { EmailCapture } from "@/components/EmailCapture";
+import { StatusBar } from "@/components/StatusBar";
+import { StatusPill } from "@/components/StatusPill";
 
 const pilares = [
   { n: "1.", glyph: "⌗", title: "Investigación ética", desc: "IA para la sociedad." },
@@ -129,6 +132,55 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section
+        id="proyectos"
+        className="grid grid-cols-2 border-b border-ink-600"
+      >
+        <div className="flex flex-col gap-[16px] px-[32px] py-[20px] pb-[32px]">
+          <div className="flex items-baseline gap-[16px]">
+            <span className="font-mono text-[11px] font-medium leading-none tracking-[0.08em] text-cybergrape">
+              /03
+            </span>
+            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky">
+              Estado del sistema
+            </span>
+          </div>
+          <StatusBar label="Uso de CPU" percent={72} value="72%" />
+          <StatusBar label="Memoria" percent={54} value="8.6 GB / 16 GB" />
+          <StatusBar label="Uptime" percent={100} value="7D 14H 22M" tone="signal" />
+          <StatusPill tone="signal" live>
+            Todos los sistemas operativos
+          </StatusPill>
+        </div>
+        <div
+          id="contacto"
+          className="flex flex-col gap-[16px] border-l border-ink-600 px-[32px] py-[20px] pb-[32px]"
+        >
+          <div className="flex items-baseline gap-[16px]">
+            <span className="font-mono text-[11px] font-medium leading-none tracking-[0.08em] text-cybergrape">
+              /04
+            </span>
+            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky">
+              Unirse al lab
+            </span>
+          </div>
+          <p className="m-0 font-mono text-[12px] leading-[1.6] text-ink-200">
+            Talleres, convocatorias y experimentos del laboratorio.
+          </p>
+          <EmailCapture label="Correo UTEM" />
+        </div>
+      </section>
+
+      <section className="flex items-center justify-between gap-[32px] px-[32px] py-[28px]">
+        <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[0.14em] text-ink-400">
+          //END_TRANSMISSION
+        </span>
+        <span className="h-px flex-1 bg-ink-600" />
+        <span className="font-mono text-[10px] font-medium leading-none tracking-[0.08em] text-ink-300">
+          © 2026 AiLAB UTEM
+        </span>
       </section>
     </>
   );
