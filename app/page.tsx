@@ -1,19 +1,39 @@
-import Image from "next/image";
-import { EmailCapture } from "@/components/EmailCapture";
-import { StatusBar } from "@/components/StatusBar";
-import { StatusPill } from "@/components/StatusPill";
+import { CornerBrackets } from "@/components/CornerBrackets";
+import { NeuralBackdrop } from "@/components/NeuralBackdrop";
+import { NeuralBlob } from "@/components/NeuralBlob";
+
+const gridTexture = `url('data:image/svg+xml,${encodeURIComponent(
+  [
+    "<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>",
+    "<pattern id='g' width='12' height='12' patternUnits='userSpaceOnUse'>",
+    "<path d='M12 0H0V12' fill='none' stroke='#6E6E6E' stroke-opacity='.1'/>",
+    "</pattern>",
+    "<rect width='64' height='64' fill='url(#g)'/>",
+    "<g fill='#6E6E6E' opacity='.14'>",
+    "<rect x='4' y='16' width='10' height='14'/>",
+    "<rect x='20' y='6' width='6' height='10'/>",
+    "<rect x='36' y='12' width='12' height='6'/>",
+    "<rect x='54' y='22' width='6' height='12'/>",
+    "<rect x='8' y='38' width='12' height='10'/>",
+    "<rect x='30' y='36' width='10' height='16'/>",
+    "<rect x='48' y='46' width='12' height='14'/>",
+    "</g>",
+    "</svg>",
+  ].join("")
+)}')`;
 
 const pilares = [
-  { n: "1.", glyph: "⌗", title: "Investigación ética", desc: "IA para la sociedad." },
-  { n: "2.", glyph: "●", title: "Código abierto", desc: "Colaboración radical." },
+  { n: "01", glyph: "⌗", title: "Investigación ética", desc: "IA para la sociedad.", accent: "text-rose" },
+  { n: "02", glyph: "●", title: "Código abierto", desc: "Colaboración radical.", accent: "text-cyan" },
   {
-    n: "3.",
+    n: "03",
     glyph: "HUD",
     title: "Desarrollo de hardware",
     desc: "No hay software sin fierros.",
+    accent: "text-rose",
   },
-  { n: "4.", glyph: "+", title: "Ética algorítmica", desc: "IA con conciencia." },
-  { n: "5.", glyph: "▮", title: "Revolución urbana", desc: "Silueta de impacto local." },
+  { n: "04", glyph: "+", title: "Ética algorítmica", desc: "IA con conciencia.", accent: "text-cyan" },
+  { n: "05", glyph: "▮", title: "Revolución urbana", desc: "Impacto local.", accent: "text-rose" },
 ];
 
 export default function HomePage() {
@@ -21,22 +41,23 @@ export default function HomePage() {
     <>
       <section
         id="top"
-        className="grid grid-cols-[minmax(0,1fr)_300px] border-b border-ink-600"
+        className="relative grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_300px] items-center border-b border-line"
       >
-        <div className="relative grid grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] items-start gap-[8px] py-[24px] pb-[28px] pl-[32px]">
+        <NeuralBackdrop />
+        <div className="relative grid min-h-0 grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] items-center gap-[8px] py-[24px] pb-[28px] pl-[32px]">
           <div className="flex flex-col gap-[20px]">
-            <span className="font-mono text-[12px] font-medium leading-none tracking-[0.08em] text-smoky">
+            <span className="font-mono text-[12px] font-medium leading-none tracking-[0.08em] text-content">
               /01
             </span>
-            <h1 className="m-0 font-hero text-[clamp(44px,5.6vw,80px)] font-black uppercase leading-[0.88] tracking-[-0.03em] text-smoky [text-wrap:balance]">
+            <h1 className="m-0 font-hero text-[clamp(44px,5.6vw,80px)] font-black uppercase leading-[0.88] tracking-[-0.03em] text-content [text-wrap:balance]">
               Intelligencia
               <br />
               Artificial UTEM
             </h1>
-            <div className="font-mono text-[12px] font-medium uppercase leading-none tracking-[0.06em] text-smoky">
+            <div className="font-mono text-[12px] font-medium uppercase leading-none tracking-[0.06em] text-content">
               [High tech, low life]. [Open source]. M7-3F.
             </div>
-            <p className="m-0 max-w-[52ch] font-mono text-[12.5px] leading-[1.75] text-ink-200 [text-wrap:pretty]">
+            <p className="m-0 max-w-[52ch] font-mono text-[12.5px] leading-[1.75] text-muted [text-wrap:pretty]">
               AI Lab UTEM es una comunidad de estudiantes e investigadores dedicada a la
               exploración y desarrollo de IA ética, accesible y de vanguardia. Cuestionamos la
               frontera tecnológica.
@@ -44,59 +65,60 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-[20px] pt-[8px]">
               <a
                 href="/proyectos"
-                className="flex h-[48px] items-center gap-[14px] bg-smoky px-[22px] font-mono text-[12px] font-medium uppercase leading-none tracking-[0.14em] text-white no-underline hover:bg-cybergrape"
+                className="flex h-[48px] items-center gap-[14px] rounded-[8px] bg-btn-bg px-[22px] font-mono text-[12px] font-medium uppercase leading-none tracking-[0.14em] text-btn-text no-underline hover:bg-cybergrape"
               >
                 Explorar proyectos <span>↗</span>
               </a>
               <a
                 href="#pilares"
-                className="flex h-[48px] items-center gap-[14px] border border-smoky px-[22px] font-mono text-[12px] font-medium uppercase leading-none tracking-[0.14em] text-smoky no-underline hover:bg-smoky hover:text-white"
+                className="flex h-[48px] items-center gap-[14px] rounded-[8px] border border-content px-[22px] font-mono text-[12px] font-medium uppercase leading-none tracking-[0.14em] text-content no-underline hover:bg-content hover:text-surface"
               >
                 Ver manifesto <span>⛶</span>
               </a>
             </div>
           </div>
           <div className="flex items-center justify-center py-[8px]">
-            <div className="relative aspect-square w-[min(340px,90%)]">
-              <Image
-                src="/hero-cyborg.webp"
-                alt="Render cyborg / IA"
-                fill
-                sizes="340px"
-                className="rounded-full object-cover [filter:grayscale(1)_contrast(1.15)]"
-              />
-            </div>
+            <NeuralBlob />
           </div>
-          <span className="absolute bottom-[12px] right-[20px] font-mono text-[11px] font-medium leading-none tracking-[0.1em] text-smoky">
+          <span className="absolute bottom-[12px] right-[20px] font-mono text-[11px] font-medium leading-none tracking-[0.1em] text-content">
             /SCN_01
           </span>
         </div>
 
-        <aside className="flex flex-col gap-[28px] border-l border-ink-600 p-[20px]">
-          <div className="flex flex-col gap-[12px]">
-            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky">
+        <aside className="relative z-10 flex flex-col gap-[28px] border-l border-line p-[20px]">
+          <div className="relative flex flex-col gap-[12px] rounded-[10px] border border-line bg-surface-raised p-[14px] shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-content">
               System status
             </span>
-            <div className="flex h-[150px] w-full items-center justify-center border border-ink-600 bg-ink-600/20 [filter:grayscale(1)_contrast(1.2)]">
-              <span className="px-[8px] text-center font-mono text-[11px] text-ink-400">
+            <div
+              className="relative flex h-[150px] w-full items-center justify-center overflow-hidden rounded-[8px] border border-ink-300 bg-ink-600/20 [filter:grayscale(1)_contrast(1.2)]"
+              style={{ backgroundImage: gridTexture }}
+            >
+              <span className="px-[8px] text-center font-mono text-[11px] text-muted-2">
                 Mapa nodo UTEM
               </span>
+              <CornerBrackets className="border-ink-400" />
             </div>
-            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.1em] text-cybergrape">
+            <span className="flex w-fit items-center rounded-[6px] bg-cybergrape/10 px-[10px] py-[6px] font-mono text-[11px] font-medium uppercase leading-none tracking-[0.1em] text-cybergrape">
               [Conexión segura]
             </span>
+            <CornerBrackets />
           </div>
-          <div className="border border-ink-600 p-[14px] [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)]">
-            <span className="block font-mono text-[11px] font-medium leading-[1.7] tracking-[0.06em] text-smoky">
+          <div className="relative rounded-[10px] border border-line bg-surface-raised p-[14px] shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+            <span className="block font-mono text-[11px] font-medium leading-[1.7] tracking-[0.06em] text-content">
               NODE: AiLAB_UTEM.LAT_
               <br />
-              45.6827.LONG_9.1749
+              33.4850.S / LONG_70.6518.W
             </span>
+            <CornerBrackets />
           </div>
         </aside>
       </section>
 
-      <section id="pilares" className="bg-smoky px-[32px] py-[22px] pb-[26px] text-white">
+      <section
+        id="pilares"
+        className="flex flex-col rounded-[45px] bg-smoky px-[32px] py-[22px] pb-[26px] text-white dark:border dark:border-white/15"
+      >
         <div className="flex items-baseline gap-[14px] pb-[18px]">
           <span className="font-mono text-[12px] font-medium leading-none tracking-[0.08em] text-limerick">
             /02
@@ -106,82 +128,32 @@ export default function HomePage() {
           </span>
           <span className="h-px flex-1 bg-[#2A2A2A]" />
         </div>
-        <div className="grid grid-cols-5 gap-[20px]">
+        <div className="grid grid-cols-1 gap-[20px] sm:grid-cols-2 lg:grid-cols-5">
           {pilares.map((p) => (
-            <div key={p.title} className="flex flex-col gap-[8px]">
+            <div key={p.title} className="flex flex-col gap-[10px]">
               <span className="font-mono text-[10px] font-medium leading-none text-ink-400">
                 {p.n}
               </span>
-              <div className="flex items-start gap-[10px]">
-                <span
-                  className={`grid h-[34px] w-[34px] flex-none place-items-center border border-[#4A4A4A] font-mono font-medium text-white ${
-                    p.glyph === "HUD" ? "text-[9px] tracking-[0.06em]" : "text-[13px]"
-                  }`}
-                >
-                  {p.glyph}
-                </span>
-                <div className="flex flex-col gap-[5px]">
-                  <span className="font-mono text-[11px] font-medium uppercase leading-[1.35] tracking-[0.1em] text-lavender">
-                    {p.title}
-                  </span>
-                  <span className="font-mono text-[11px] leading-[1.5] text-ink-500">
-                    {p.desc}
-                  </span>
-                </div>
-              </div>
+              <span
+                className={`grid h-[34px] w-[34px] place-items-center border border-[#4A4A4A] font-mono font-medium ${p.accent} ${
+                  p.glyph === "HUD" ? "text-[9px] tracking-[0.06em]" : "text-[13px]"
+                }`}
+              >
+                {p.glyph}
+              </span>
+              <span
+                className={`font-mono text-[12px] font-bold uppercase leading-[1.3] tracking-[0.08em] ${p.accent}`}
+              >
+                {p.title}
+              </span>
+              <span className="font-mono text-[11px] leading-[1.5] text-ink-400">
+                {p.desc}
+              </span>
             </div>
           ))}
         </div>
       </section>
 
-      <section
-        id="proyectos"
-        className="grid grid-cols-2 border-b border-ink-600"
-      >
-        <div className="flex flex-col gap-[16px] px-[32px] py-[20px] pb-[32px]">
-          <div className="flex items-baseline gap-[16px]">
-            <span className="font-mono text-[11px] font-medium leading-none tracking-[0.08em] text-cybergrape">
-              /03
-            </span>
-            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky">
-              Estado del sistema
-            </span>
-          </div>
-          <StatusBar label="Uso de CPU" percent={72} value="72%" />
-          <StatusBar label="Memoria" percent={54} value="8.6 GB / 16 GB" />
-          <StatusBar label="Uptime" percent={100} value="7D 14H 22M" tone="signal" />
-          <StatusPill tone="signal" live>
-            Todos los sistemas operativos
-          </StatusPill>
-        </div>
-        <div
-          id="contacto"
-          className="flex flex-col gap-[16px] border-l border-ink-600 px-[32px] py-[20px] pb-[32px]"
-        >
-          <div className="flex items-baseline gap-[16px]">
-            <span className="font-mono text-[11px] font-medium leading-none tracking-[0.08em] text-cybergrape">
-              /04
-            </span>
-            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky">
-              Unirse al lab
-            </span>
-          </div>
-          <p className="m-0 font-mono text-[12px] leading-[1.6] text-ink-200">
-            Talleres, convocatorias y experimentos del laboratorio.
-          </p>
-          <EmailCapture label="Correo UTEM" />
-        </div>
-      </section>
-
-      <section className="flex items-center justify-between gap-[32px] px-[32px] py-[28px]">
-        <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[0.14em] text-ink-400">
-          {"//END_TRANSMISSION"}
-        </span>
-        <span className="h-px flex-1 bg-ink-600" />
-        <span className="font-mono text-[10px] font-medium leading-none tracking-[0.08em] text-ink-300">
-          © 2026 AiLAB UTEM
-        </span>
-      </section>
-    </>
+      </>
   );
 }
