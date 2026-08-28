@@ -1,45 +1,109 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
+
+  --ail-surface: #f5f5f0;
+  --ail-surface-raised: #fdfdfa;
+  --ail-content: #0a0a0a;
+  --ail-line: #e0e0db;
+  --ail-muted: #3d3d3d;
+  --ail-muted-2: #9a9a9a;
+  --ail-muted-3: #6e6e6e;
+  --ail-muted-4: #c4c4c4;
+  --ail-btn-bg: #0a0a0a;
+  --ail-btn-text: #ffffff;
+  --ail-net-node: #0a0a0a;
+  --ail-net-line: #0a0a0a;
+}
+
+.dark {
+  color-scheme: dark;
+  --ail-surface: #0a0a0a;
+  --ail-surface-raised: #151515;
+  --ail-content: #f5f5f0;
+  --ail-line: rgba(255, 255, 255, 0.14);
+  --ail-muted: #d8d8d3;
+  --ail-muted-2: #a0a0a0;
+  --ail-muted-3: #a8a8a3;
+  --ail-muted-4: #8a8a85;
+  --ail-btn-bg: #f5f5f0;
+  --ail-btn-text: #0a0a0a;
+  --ail-net-node: #ffffff;
+  --ail-net-line: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--ail-surface);
+  --color-surface-raised: var(--ail-surface-raised);
+  --color-content: var(--ail-content);
+  --color-line: var(--ail-line);
+  --color-muted: var(--ail-muted);
+  --color-muted-2: var(--ail-muted-2);
+  --color-muted-3: var(--ail-muted-3);
+  --color-muted-4: var(--ail-muted-4);
+  --color-btn-bg: var(--ail-btn-bg);
+  --color-btn-text: var(--ail-btn-text);
   --font-sans: var(--font-geist-sans);
 }
 
 @theme {
-  --color-smoky: #0D0D0D;
-  --color-cybergrape: #63458C;
-  --color-lavender: #AA77F2;
-  --color-limerick: #99BF0F;
-  --color-cyan: #00F0FF;
-  --color-paper: #F4F3EF;
-  --color-paper-raised: #FAF9F6;
-  --color-ink-100: #1A1A1A;
-  --color-ink-200: #3D3D3D;
-  --color-ink-300: #6E6E6E;
-  --color-ink-400: #9A9A9A;
-  --color-ink-500: #C4C4C4;
-  --color-ink-600: #DEDDD9;
+  --color-smoky: #0a0a0a;
+  --color-cybergrape: #4dd9e8;
+  --color-lavender: #aa77f2;
+  --color-limerick: #d4ff3d;
+  --color-rose: #ff4fd8;
+  --color-cyan: #4dd9e8;
+  --color-paper: #f5f5f0;
+  --color-paper-raised: #fdfdfa;
+  --color-ink-100: #1a1a1a;
+  --color-ink-200: #3d3d3d;
+  --color-ink-300: #6e6e6e;
+  --color-ink-400: #9a9a9a;
+  --color-ink-500: #c4c4c4;
+  --color-ink-600: #e0e0db;
   --font-hero: var(--font-archivo), Helvetica, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  margin: 0;
+  background: var(--ail-surface);
+  color: var(--ail-content);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ail-glow {
+  background: radial-gradient(
+    circle,
+    rgba(77, 217, 232, 0.2) 0%,
+    rgba(212, 255, 61, 0.16) 55%,
+    transparent 75%
+  );
+  filter: blur(50px);
+}
+
+.dark .ail-glow {
+  background: radial-gradient(
+    circle,
+    rgba(77, 217, 232, 0.3) 0%,
+    rgba(212, 255, 61, 0.24) 55%,
+    transparent 75%
+  );
+  filter: blur(58px);
 }
 
 @keyframes ail-blink {
@@ -51,7 +115,68 @@ body {
   }
 }
 
-body {
-  margin: 0;
-  background: #0d0d0d;
+@keyframes ail-line-pulse {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ail-pulse {
+  stroke-dasharray: 0.18 0.82;
+  stroke-dashoffset: 1;
+  animation: ail-line-pulse 4s linear infinite;
+}
+
+@keyframes ail-throb {
+  0%, 100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes ail-node-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.ail-node-pulse {
+  animation: ail-node-pulse 3.4s ease-in-out infinite;
+}
+
+.ail-throb {
+  animation: ail-throb 3s ease-in-out infinite;
+}
+
+@keyframes ail-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ail-spin {
+  animation: ail-spin 26s linear infinite;
+}
+
+@keyframes ail-float {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.ail-float {
+  animation: ail-float 4s ease-in-out infinite;
 }
