@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# backup local del diseño original (no se sube)
+/REVERT-DISENO-2026.md
+
 # debug
 npm-debug.log*
 yarn-debug.log*
