@@ -12,21 +12,21 @@ export function EmailCapture({ label }: EmailCaptureProps) {
     >
       <label
         htmlFor="email-capture"
-        className="font-mono font-medium text-[11px] leading-none tracking-[0.08em] uppercase text-smoky"
+        className="font-mono font-medium text-[11px] leading-none tracking-[0.08em] uppercase text-content"
       >
         {label}
       </label>
-      <div className="flex h-[48px] border border-smoky focus-within:border-cybergrape">
+      <div className="flex h-[48px] border border-content focus-within:border-cybergrape">
         <input
           id="email-capture"
           type="email"
           required
           placeholder="tu-correo@utem.cl"
-          className="min-w-0 flex-1 bg-white px-[14px] font-mono text-[12px] text-smoky outline-none placeholder:text-ink-400"
+          className="min-w-0 flex-1 bg-transparent px-[14px] font-mono text-[12px] text-content outline-none placeholder:text-muted-2"
         />
         <button
           type="submit"
-          className="bg-smoky px-[18px] font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-white hover:bg-cybergrape"
+          className="bg-btn-bg px-[18px] font-mono font-medium text-[11px] tracking-[0.14em] uppercase text-btn-text hover:bg-cybergrape"
         >
           Enviar ↗
         </button>

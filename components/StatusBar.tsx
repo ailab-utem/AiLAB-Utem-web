@@ -11,11 +11,11 @@ export function StatusBar({ label, percent, value, tone = "default" }: StatusBar
 
   return (
     <div className="flex flex-col gap-[6px]">
-      <div className="flex items-baseline justify-between font-mono text-[11px] leading-none tracking-[0.06em] uppercase text-smoky">
+      <div className="flex items-baseline justify-between font-mono text-[11px] leading-none tracking-[0.06em] uppercase text-content">
         <span>{label}</span>
-        <span className="text-ink-300">{value}</span>
+        <span className="text-muted-3">{value}</span>
       </div>
-      <div className="h-[16px] w-full border border-ink-600 bg-paper-raised">
+      <div className="h-[16px] w-full border border-line bg-surface-raised">
         <div className={`h-full ${fill}`} style={{ width: `${clamped}%` }} />
       </div>
     </div>
