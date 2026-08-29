@@ -67,10 +67,12 @@ Las rutas son relativas a la raíz del repo.
 - `data/noticias.csv` (nuevo, versionado) — fuente del carrusel
   (`fecha,titulo,resumen,url`), leída en build por `app/page.tsx` y ordenada por
   fecha desc.
-- `app/quienes-somos/page.tsx` (nuevo) — marcador `/03`, secciones Misión /
-  Objetivos / Equipo con placeholder. El nav `Quiénes somos` ahora apunta acá
-  (antes era ancla a `/#pilares`); `transitionTypes` de los links de nav
-  simplificado a `nav-forward`.
+- `app/quienes-somos/page.tsx` (nuevo) — marcador `/03`. Misión y Objetivos con
+  copy real (4 objetivos como lista con viñeta-icono); Equipo queda placeholder.
+  El nav `Quiénes somos` ahora apunta acá (antes era ancla a `/#pilares`);
+  `transitionTypes` de los links de nav simplificado a `nav-forward`.
+- `components/IconObjetivo.tsx` (nuevo) — icono del pack de identidad visual
+  (ICON-28) inline con `fill="currentColor"`, usado como viñeta de los objetivos.
 - `app/api/contacto/route.ts` (nuevo) — `POST`: valida (espejo del form) y hace
   append a `data/contacto.csv` (git-ignored). El sink de archivo está aislado en
   un bloque para cambiarlo si se pasa a serverless.
