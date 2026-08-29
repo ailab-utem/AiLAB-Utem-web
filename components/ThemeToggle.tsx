@@ -30,6 +30,19 @@ export function ThemeToggle() {
 
   const toggle = () => {
     const next = !dark;
+    const root = document.documentElement;
+
+    const wipe = document.createElement("div");
+    wipe.className = "ail-cp-wipe";
+    root.appendChild(wipe);
+
+    root.classList.add("ail-cp-glitch");
+    const finish = () => {
+      wipe.remove();
+      root.classList.remove("ail-cp-glitch");
+    };
+    wipe.addEventListener("animationend", finish, { once: true });
+
     applyTheme(next);
     try {
       localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");

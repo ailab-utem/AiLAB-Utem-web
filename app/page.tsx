@@ -1,6 +1,8 @@
 import { CornerBrackets } from "@/components/CornerBrackets";
 import { NeuralBackdrop } from "@/components/NeuralBackdrop";
 import { NeuralBlob } from "@/components/NeuralBlob";
+import { PageTransition } from "@/components/PageTransition";
+import { Typewriter } from "@/components/Typewriter";
 
 const gridTexture = `url('data:image/svg+xml,${encodeURIComponent(
   [
@@ -38,7 +40,7 @@ const pilares = [
 
 export default function HomePage() {
   return (
-    <>
+    <PageTransition>
       <section
         id="top"
         className="relative grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_300px] items-center border-b border-line"
@@ -58,9 +60,10 @@ export default function HomePage() {
               [High tech, low life]. [Open source]. M7-3F.
             </div>
             <p className="m-0 max-w-[52ch] font-mono text-[12.5px] leading-[1.75] text-muted [text-wrap:pretty]">
-              AI Lab UTEM es una comunidad de estudiantes e investigadores dedicada a la
-              exploración y desarrollo de IA ética, accesible y de vanguardia. Cuestionamos la
-              frontera tecnológica.
+              <Typewriter
+                text="AI Lab UTEM es una comunidad de estudiantes e investigadores dedicada a la exploración y desarrollo de IA ética, accesible y de vanguardia. Cuestionamos la frontera tecnológica."
+                startDelay={700}
+              />
             </p>
             <div className="flex flex-wrap items-center gap-[20px] pt-[8px]">
               <a
@@ -153,7 +156,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      </>
+    </PageTransition>
   );
 }

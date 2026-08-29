@@ -40,9 +40,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             __html: `(function(){try{var t=localStorage.getItem("ail-theme");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;if(d){document.documentElement.classList.add("dark");}}catch(e){}})();`,
           }}
         />
-        <header className="flex h-[64px] items-stretch bg-smoky text-white">
+        <header
+          className="flex h-[64px] items-stretch bg-smoky text-white"
+          style={{ viewTransitionName: "site-header" }}
+        >
           <Link
             href="/#top"
+            transitionTypes={["nav-back"]}
             className="flex min-w-[120px] flex-col justify-center border-r border-[#2A2A2A] px-[24px] no-underline"
           >
             <span className="font-hero text-[22px] font-black uppercase leading-none tracking-[-0.03em] text-white">
@@ -68,6 +72,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 )}
                 <Link
                   href={link.href}
+                  transitionTypes={[i === 0 ? "nav-back" : "nav-forward"]}
                   className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-white no-underline"
                 >
                   {link.label}
@@ -87,6 +92,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="flex items-center border-l border-[#2A2A2A] px-[16px]">
             <Link
               href="/contacto"
+              transitionTypes={["nav-forward"]}
               className="flex h-[36px] items-center gap-[10px] rounded-[8px] bg-limerick px-[18px] font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-smoky no-underline hover:bg-lavender"
             >
               Unirse al lab <span>↗</span>
@@ -119,7 +125,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        <div className="flex h-[32px] items-stretch overflow-hidden border-t border-line bg-surface-raised">
+        <div
+          className="flex h-[32px] items-stretch overflow-hidden border-t border-line bg-surface-raised"
+          style={{ viewTransitionName: "site-footer" }}
+        >
           <div className="flex items-center gap-[8px] px-[16px] font-mono text-[10px] font-medium uppercase leading-none tracking-[0.14em] text-muted-3">
             <span className="h-[6px] w-[6px] rounded-full bg-limerick animate-[ail-blink_1.1s_linear_infinite]" />
             Conexión segura

@@ -1,9 +1,11 @@
 import { ContactForm } from "@/components/ContactForm";
 import { CornerBrackets } from "@/components/CornerBrackets";
+import { PageTransition } from "@/components/PageTransition";
 
 export default function ContactoPage() {
   return (
-    <section className="flex min-h-0 flex-1 flex-col gap-[20px] px-[32px] py-[40px]">
+    <PageTransition>
+      <section className="flex min-h-0 flex-1 flex-col gap-[20px] px-[32px] py-[40px]">
       <span className="font-mono text-[11px] font-medium leading-none tracking-[0.08em] text-cybergrape">
         /08
       </span>
@@ -46,5 +48,6 @@ export default function ContactoPage() {
         </aside>
       </div>
     </section>
+    </PageTransition>
   );
 }
