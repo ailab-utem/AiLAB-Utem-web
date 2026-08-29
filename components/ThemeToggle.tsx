@@ -6,6 +6,8 @@ import { Moon, Sun } from "lucide-react";
 const STORAGE_KEY = "ail-theme";
 const listeners = new Set<() => void>();
 
+let pattern = 0;
+
 function subscribe(cb: () => void) {
   listeners.add(cb);
   return () => {
@@ -33,7 +35,8 @@ export function ThemeToggle() {
     const root = document.documentElement;
 
     const wipe = document.createElement("div");
-    wipe.className = "ail-cp-wipe";
+    wipe.className = `ail-cp-wipe ail-cp-wipe--p${(pattern % 4) + 1}`;
+    pattern = (pattern + 1) % 4;
     root.appendChild(wipe);
 
     root.classList.add("ail-cp-glitch");

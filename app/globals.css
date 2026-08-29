@@ -231,6 +231,196 @@ body {
   }
 }
 
+/* =====================================================================
+   Patrones del cambio de tema — rotan en cada click (máx. 4)
+   Patrón 1 = base (.ail-cp-wipe), wipe vertical con scanlines + cromática
+   ===================================================================== */
+
+/* P2 — Glitch por franjas: cortes horizontales con salto RGB */
+.ail-cp-wipe--p2 {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(212, 255, 61, 0.16) 0px,
+    transparent 0px,
+    transparent 26px,
+    rgba(255, 79, 216, 0.16) 26px,
+    transparent 26px,
+    transparent 52px,
+    rgba(77, 217, 232, 0.16) 52px,
+    transparent 52px,
+    transparent 78px
+  );
+  animation: ail-cp-wipe-p2 0.8s steps(6, end) forwards;
+}
+
+/* P3 — Interferencia de TV: señal que se pierde (intensa) */
+.ail-cp-wipe--p3 {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(212, 255, 61, 0) 0px,
+    rgba(212, 255, 61, 0.12) 1px,
+    transparent 2px,
+    transparent 3px,
+    rgba(77, 217, 232, 0.14) 3px,
+    transparent 4px,
+    transparent 5px,
+    rgba(255, 255, 255, 0.22) 5px,
+    transparent 6px,
+    transparent 7px
+  );
+  animation: ail-cp-wipe-p3 0.95s steps(1, end) forwards;
+}
+
+/* Interferencia ciberpunk: franjas RGB cortadas y desplazadas como señal */
+.ail-cp-wipe--p3::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 79, 216, 0) 0px,
+    rgba(77, 217, 232, 0.22) 2px,
+    rgba(255, 79, 216, 0) 2px,
+    rgba(255, 79, 216, 0) 7px,
+    rgba(212, 255, 61, 0.16) 7px,
+    rgba(212, 255, 61, 0) 8px,
+    rgba(255, 255, 255, 0) 8px,
+    rgba(255, 255, 255, 0.12) 9px,
+    rgba(255, 255, 255, 0) 10px,
+    rgba(77, 217, 232, 0.18) 10px,
+    rgba(77, 217, 232, 0) 12px
+  );
+  background-size: 100% 12px;
+  animation: ail-cp-tv-noise-p3 0.09s steps(3, end) infinite;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  filter: contrast(1.5) saturate(1.6);
+}
+
+/* P4 — Scan diagonal: barrido de luz en diagonal */
+.ail-cp-wipe--p4 {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(77, 217, 232, 0.22) 47%,
+    rgba(212, 255, 61, 0.3) 50%,
+    rgba(255, 79, 216, 0.22) 53%,
+    transparent 58%,
+    transparent 100%
+  );
+  animation: ail-cp-wipe-p4 0.85s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Los patrones 2 y 4 no necesitan scanlines ni cromática superpuestas
+   (P3 conserva su ::before para el ruido estático) */
+.ail-cp-wipe--p2::before,
+.ail-cp-wipe--p2::after,
+.ail-cp-wipe--p3::after,
+.ail-cp-wipe--p4::before,
+.ail-cp-wipe--p4::after {
+  display: none;
+}
+
+@keyframes ail-cp-wipe-p2 {
+  0% {
+    transform: translateX(0);
+    filter: none;
+    opacity: 0;
+  }
+  12% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  22% {
+    transform: translateX(-18px);
+    filter: drop-shadow(6px 0 rgba(255, 79, 216, 0.7))
+      drop-shadow(-6px 0 rgba(77, 217, 232, 0.7));
+  }
+  30% {
+    transform: translateX(12px);
+  }
+  40% {
+    transform: translateX(-8px);
+    filter: drop-shadow(4px 0 rgba(255, 79, 216, 0.6))
+      drop-shadow(-4px 0 rgba(77, 217, 232, 0.6));
+  }
+  52% {
+    transform: translateX(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    filter: none;
+    opacity: 0;
+  }
+}
+
+@keyframes ail-cp-wipe-p3 {
+  0% {
+    transform: translateY(0) scaleY(1);
+    filter: none;
+    opacity: 1;
+  }
+  10% {
+    transform: translateY(-24px) scaleY(1.06);
+    filter: brightness(1.6) contrast(1.5);
+  }
+  20% {
+    transform: translateY(58px) scaleY(0.9);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-40px) scaleY(1.05);
+  }
+  38% {
+    transform: translateY(24px) scaleY(0.97);
+  }
+  46% {
+    transform: translateY(-14px) scaleY(1.02);
+    filter: contrast(1.9) brightness(1.6);
+  }
+  58% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0.9;
+  }
+  76% {
+    transform: translateY(4px) scaleY(1);
+    filter: blur(3px) brightness(1.8) contrast(1.3);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+    filter: none;
+    opacity: 0;
+  }
+}
+
+@keyframes ail-cp-tv-noise-p3 {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 48px;
+  }
+}
+
+@keyframes ail-cp-wipe-p4 {
+  0% {
+    transform: translateX(-90%) skewX(-12deg);
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(90%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
 .ail-glow {
   background: radial-gradient(
     circle,
