@@ -1,28 +1,16 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { CornerBrackets } from "@/components/CornerBrackets";
 import { NeuralBackdrop } from "@/components/NeuralBackdrop";
 import { NeuralBlob } from "@/components/NeuralBlob";
+import { NewsCarousel, type NewsItem } from "@/components/NewsCarousel";
 import { PageTransition } from "@/components/PageTransition";
 import { Typewriter } from "@/components/Typewriter";
+import { parseCsv } from "@/lib/csv.mjs";
 
-const gridTexture = `url('data:image/svg+xml,${encodeURIComponent(
-  [
-    "<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>",
-    "<pattern id='g' width='12' height='12' patternUnits='userSpaceOnUse'>",
-    "<path d='M12 0H0V12' fill='none' stroke='#6E6E6E' stroke-opacity='.1'/>",
-    "</pattern>",
-    "<rect width='64' height='64' fill='url(#g)'/>",
-    "<g fill='#6E6E6E' opacity='.14'>",
-    "<rect x='4' y='16' width='10' height='14'/>",
-    "<rect x='20' y='6' width='6' height='10'/>",
-    "<rect x='36' y='12' width='12' height='6'/>",
-    "<rect x='54' y='22' width='6' height='12'/>",
-    "<rect x='8' y='38' width='12' height='10'/>",
-    "<rect x='30' y='36' width='10' height='16'/>",
-    "<rect x='48' y='46' width='12' height='14'/>",
-    "</g>",
-    "</svg>",
-  ].join("")
-)}')`;
+const noticias = (
+  parseCsv(readFileSync(join(process.cwd(), "data/noticias.csv"), "utf8")) as NewsItem[]
+).sort((a, b) => b.fecha.localeCompare(a.fecha));
 
 const pilares = [
   { n: "01", glyph: "⌗", title: "Investigación ética", desc: "IA para la sociedad.", accent: "text-rose" },
@@ -89,24 +77,7 @@ export default function HomePage() {
         </div>
 
         <aside className="relative z-10 flex flex-col gap-[28px] border-l border-line p-[20px]">
-          <div className="relative flex flex-col gap-[12px] rounded-[10px] border border-line bg-surface-raised p-[14px] shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
-            <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-content">
-              System status
-            </span>
-            <div
-              className="relative flex h-[150px] w-full items-center justify-center overflow-hidden rounded-[8px] border border-ink-300 bg-ink-600/20 [filter:grayscale(1)_contrast(1.2)]"
-              style={{ backgroundImage: gridTexture }}
-            >
-              <span className="px-[8px] text-center font-mono text-[11px] text-muted-2">
-                Mapa nodo UTEM
-              </span>
-              <CornerBrackets className="border-ink-400" />
-            </div>
-            <span className="flex w-fit items-center rounded-[6px] bg-cybergrape/10 px-[10px] py-[6px] font-mono text-[11px] font-medium uppercase leading-none tracking-[0.1em] text-cybergrape">
-              [Conexión segura]
-            </span>
-            <CornerBrackets />
-          </div>
+          <NewsCarousel items={noticias} />
           <div className="relative rounded-[10px] border border-line bg-surface-raised p-[14px] shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
             <span className="block font-mono text-[11px] font-medium leading-[1.7] tracking-[0.06em] text-content">
               NODE: AiLAB_UTEM.LAT_
