@@ -57,3 +57,23 @@ Las rutas son relativas a la raíz del repo.
 
 - `CHANGELOG.md` — este archivo.
 - `.gitignore` — excluye `REVERT-DISENO-2026.md` (respaldo local con el diseño original).
+
+## feat: carrusel de noticias, page Quiénes somos, backend contacto CSV
+
+- `lib/csv.mjs` (nuevo) — `parseCsv` / `toCsvRow`, CSV mínimo sin dependencia.
+  Self-check en `lib/csv.check.mjs` (`node lib/csv.check.mjs`).
+- `components/NewsCarousel.tsx` (nuevo) — carrusel compacto (1 noticia, flechas +
+  dots, wrap-around) que reemplaza el panel "System status" del aside del hero.
+- `data/noticias.csv` (nuevo, versionado) — fuente del carrusel
+  (`fecha,titulo,resumen,url`), leída en build por `app/page.tsx` y ordenada por
+  fecha desc.
+- `app/quienes-somos/page.tsx` (nuevo) — marcador `/03`, secciones Misión /
+  Objetivos / Equipo con placeholder. El nav `Quiénes somos` ahora apunta acá
+  (antes era ancla a `/#pilares`); `transitionTypes` de los links de nav
+  simplificado a `nav-forward`.
+- `app/api/contacto/route.ts` (nuevo) — `POST`: valida (espejo del form) y hace
+  append a `data/contacto.csv` (git-ignored). El sink de archivo está aislado en
+  un bloque para cambiarlo si se pasa a serverless.
+- `components/ContactForm.tsx` — `handleSubmit` async con `fetch` real al route +
+  estados `error` / `pending`.
+- `.gitignore` — excluye `data/contacto.csv` (envíos del formulario).
