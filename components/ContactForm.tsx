@@ -30,6 +30,8 @@ const INTEREST_OPTIONS = [
 export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
   const [socials, setSocials] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
 
@@ -45,12 +47,13 @@ export function ContactForm() {
     );
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
+    const career = String(data.get("career") ?? "");
 
     const next: Errors = {};
     if (!name) next.name = "[ERROR DE CAMPO]";
@@ -60,7 +63,23 @@ export function ContactForm() {
     else if (message.length < 10) next.message = "[MIN. 10 CARACTERES]";
 
     setErrors(next);
-    setSent(Object.keys(next).length === 0);
+    if (Object.keys(next).length > 0) return;
+
+    setPending(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, career, socials, interests, message }),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch {
+      setError("[FALLO DE TRANSMISIÓN] Reintenta.");
+    } finally {
+      setPending(false);
+    }
   };
 
   return (
@@ -232,15 +251,24 @@ export function ContactForm() {
         <div className="flex flex-wrap items-center justify-between gap-[14px] pt-[4px]">
           <button
             type="submit"
-            className="flex h-[46px] items-center gap-[12px] rounded-[8px] bg-btn-bg px-[22px] font-mono text-[12px] font-medium uppercase leading-none tracking-[0.14em] text-btn-text hover:bg-cybergrape"
+            disabled={pending}
+            className="flex h-[46px] items-center gap-[12px] rounded-[8px] bg-btn-bg px-[22px] font-mono text-[12px] font-medium uppercase leading-none tracking-[0.14em] text-btn-text hover:bg-cybergrape disabled:opacity-60"
           >
-            Transmitir <span aria-hidden>↗</span>
+            {pending ? "Transmitiendo…" : "Transmitir"} <span aria-hidden>↗</span>
           </button>
           <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[0.1em] text-muted-2">
             [canal abierto]
           </span>
         </div>
       </form>
+
+      {error && (
+        <div className="border-t border-line pt-[16px]">
+          <span className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-rose">
+            {error}
+          </span>
+        </div>
+      )}
 
       {sent && (
         <div className="flex flex-col gap-[8px] border-t border-line pt-[16px]">
