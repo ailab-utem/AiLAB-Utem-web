@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 const navLinks = [
-  { href: "/#pilares", label: "Quiénes somos" },
+  { href: "/quienes-somos", label: "Quiénes somos" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/talleres", label: "Talleres" },
   { href: "/recursos", label: "Recursos" },
@@ -72,7 +72,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 )}
                 <Link
                   href={link.href}
-                  transitionTypes={[i === 0 ? "nav-back" : "nav-forward"]}
+                  transitionTypes={["nav-forward"]}
                   className="font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-white no-underline"
                 >
                   {link.label}
