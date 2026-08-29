@@ -1,5 +1,6 @@
 import { IconObjetivo } from "@/components/IconObjetivo";
 import { PageTransition } from "@/components/PageTransition";
+import { Typewriter } from "@/components/Typewriter";
 
 type Seccion = { titulo: string; parrafo?: string; items?: string[] };
 
@@ -55,7 +56,7 @@ export default function QuienesSomosPage() {
               </ul>
             ) : (
               <p className="m-0 max-w-[64ch] font-mono text-[12px] leading-[1.7] text-muted-3">
-                {s.parrafo}
+                <Typewriter text={s.parrafo ?? ""} />
               </p>
             )}
           </div>
