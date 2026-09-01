@@ -12,7 +12,7 @@ export function StatusPill({ tone = "default", live = false, children }: StatusP
 
   return (
     <div
-      className={`inline-flex w-fit items-center gap-[8px] h-[28px] px-[14px] rounded-full font-mono font-medium text-[11px] leading-none tracking-[0.08em] uppercase ${bg} ${text}`}
+      className={`ail-hud-clip [--ail-hud-cut:8px] inline-flex w-fit items-center gap-[8px] h-[28px] px-[14px] font-mono font-medium text-[11px] leading-none tracking-[0.08em] uppercase ${bg} ${text}`}
     >
       <span
         className={`w-[6px] h-[6px] rounded-full bg-current ${live ? "animate-[ail-blink_1.1s_linear_infinite]" : ""}`}

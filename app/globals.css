@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+/* Pantallas sin cursor: alli las reglas hover: nunca se aplican, asi que
+   la senal de "esto se toca" hay que darla por otra via. */
+@custom-variant touch (@media (hover: none));
 
 :root {
   --background: #ffffff;
@@ -68,6 +71,16 @@
   --color-ink-400: #9a9a9a;
   --color-ink-500: #c4c4c4;
   --color-ink-600: #e0e0db;
+  /* Paleta oficial - Manual de Identidad Visual AI Lab UTEM v1.2, seccion 2.
+     Hex exactos del manual; los tokens de marca de arriba se conservan tal cual
+     para no alterar el resto del sitio. */
+  --color-mi-smoky: #0d0d0d;
+  --color-mi-grape: #63458c;
+  --color-mi-lavender: #aa77f2;
+  --color-mi-limerick: #99bf0f;
+  --color-mi-cyan: #00f0ff;
+  --color-mi-white: #f2f2f2;
+
   --font-hero: var(--font-archivo), Helvetica, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
@@ -639,5 +652,99 @@ body {
   ::view-transition-group(*) {
     animation-duration: 0s !important;
     animation-delay: 0s !important;
+  }
+}
+/* --- Panel de detalle de módulo (Talleres) --- */
+
+@keyframes ail-panel-in {
+  from {
+    transform: translateX(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ail-scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ail-panel-in {
+  animation: ail-panel-in 180ms ease-out both;
+}
+
+.ail-scrim-in {
+  animation: ail-scrim-in 180ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ail-panel-in,
+  .ail-scrim-in {
+    animation-duration: 0s;
+  }
+}
+
+/* --- Cajas HUD con esquinas cortadas a 45 grados ---
+   Manual de Identidad Visual v1.2, seccion 4 ("cajas de contenido con bordes
+   recortados en angulos de 45 grados; prohibido el uso de bordes completamente
+   redondeados") y seccion 7, DO 2.
+
+   `.ail-hud` pinta el marco en dos capas: el elemento aporta la linea y
+   ::before el relleno, desplazado --ail-hud-bw hacia dentro. Se hace asi
+   porque un `border` normal desaparece justo en la diagonal al recortarla
+   con clip-path. `.ail-hud-clip` es la version sin marco, para superficies
+   de un solo color (botones rellenos).
+
+   Variables ajustables por elemento:
+     --ail-hud-cut     tamano del corte        (por defecto 14px)
+     --ail-hud-bw      grosor de la linea      (por defecto 1px)
+     --ail-hud-border  color de la linea
+     --ail-hud-fill    color del relleno */
+@layer components {
+  .ail-hud,
+  .ail-hud-clip {
+    --ail-hud-cut: 14px;
+    clip-path: polygon(
+      var(--ail-hud-cut) 0,
+      100% 0,
+      100% calc(100% - var(--ail-hud-cut)),
+      calc(100% - var(--ail-hud-cut)) 100%,
+      0 100%,
+      0 var(--ail-hud-cut)
+    );
+  }
+
+  .ail-hud {
+    --ail-hud-bw: 1px;
+    --ail-hud-border: var(--ail-line);
+    --ail-hud-fill: var(--ail-surface-raised);
+    position: relative;
+    background: var(--ail-hud-border);
+  }
+
+  /* clip-path crea contexto de apilamiento, asi que z-index:-1 deja el relleno
+     por encima del marco y por debajo del contenido. */
+  .ail-hud::before {
+    content: "";
+    position: absolute;
+    inset: var(--ail-hud-bw);
+    z-index: -1;
+    background: var(--ail-hud-fill);
+    transition: background-color 170ms ease-out;
+    clip-path: polygon(
+      calc(var(--ail-hud-cut) - var(--ail-hud-bw)) 0,
+      100% 0,
+      100% calc(100% - var(--ail-hud-cut) + var(--ail-hud-bw)),
+      calc(100% - var(--ail-hud-cut) + var(--ail-hud-bw)) 100%,
+      0 100%,
+      0 calc(var(--ail-hud-cut) - var(--ail-hud-bw))
+    );
   }
 }
