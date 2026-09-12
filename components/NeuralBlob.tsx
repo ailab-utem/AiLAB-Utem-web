@@ -3,7 +3,7 @@ import { CornerBrackets } from "@/components/CornerBrackets";
 
 export function NeuralBlob() {
   return (
-    <div className="relative aspect-square w-[min(400px,88%)]">
+    <div className="relative aspect-square w-[clamp(240px,30vw,520px)]">
       <div aria-hidden className="ail-glow absolute inset-[4%] rounded-full" />
 
       <div
@@ -17,9 +17,10 @@ export function NeuralBlob() {
           <Image
             src="/hero-cyborg.webp"
             alt="Render cyborg / IA"
-            width={340}
-            height={340}
-            sizes="400px"
+            width={560}
+            height={560}
+            sizes="clamp(240px, 30vw, 520px)"
+            quality={90}
             className="h-full w-full object-cover [transform:scale(1.12)]"
             style={{ objectPosition: "50% 30%" }}
           />
