@@ -27,7 +27,6 @@ const navLinks = [
   { href: "/quienes-somos", label: "Quiénes somos" },
   { href: "/proyectos", label: "Proyectos" },
   { href: "/talleres", label: "Talleres" },
-  { href: "/recursos", label: "Recursos" },
   { href: "/contacto", label: "Contacto" },
 ];
 
