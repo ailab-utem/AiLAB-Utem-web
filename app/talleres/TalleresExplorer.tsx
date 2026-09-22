@@ -219,16 +219,15 @@ function DetallePanel({ taller, onClose }: { taller: Taller; onClose: () => void
         </div>
 
         <footer className="flex flex-col gap-[10px] border-t border-line px-[22px] py-[16px] sm:flex-row sm:items-center">
-          {/* Acción principal: por ahora es un marcador, todavía no navega a
-              ningún lado. Cuando exista el contenido del curso, basta con
-              envolverlo en un <Link> o darle un onClick. */}
-          {tieneCurso ? (
-            <button
-              type="button"
+          {tieneCurso && taller.enlace ? (
+            <a
+              href={taller.enlace}
+              target="_blank"
+              rel="noopener noreferrer"
               className="ail-hud flex h-[44px] w-full cursor-pointer items-center justify-center whitespace-nowrap px-[18px] sm:flex-1 font-mono text-[11px] font-medium uppercase leading-none tracking-[0.14em] text-mi-smoky outline-none transition-colors duration-[170ms] ease-out [--ail-hud-border:var(--color-mi-limerick)] [--ail-hud-cut:8px] [--ail-hud-fill:var(--color-mi-limerick)] hover:text-mi-white hover:[--ail-hud-border:var(--color-mi-lavender)] hover:[--ail-hud-fill:var(--color-mi-lavender)] focus-visible:[--ail-hud-border:var(--color-mi-cyan)] focus-visible:[--ail-hud-bw:2px]"
             >
               {"COMENZAR CURSO_"}
-            </button>
+            </a>
           ) : null}
           <button
             ref={cerrarRef}
