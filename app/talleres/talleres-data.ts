@@ -21,6 +21,8 @@ export type Taller = {
   objetivos?: string[];
   /** Unidades o contenidos del módulo, en orden. */
   contenidos?: string[];
+  /** URL externa donde se cursa el módulo (ej. notebook de Colab). */
+  enlace?: string;
 };
 
 export const talleres: Taller[] = [
@@ -34,7 +36,39 @@ export const talleres: Taller[] = [
     titulo: "Diseño y desarrollo web (Con y Sin AI)",
     estado: "proximamente",
   },
-  { codigo: "M07", titulo: "Introducción a Python", estado: "proximamente" },
+  {
+    codigo: "M07",
+    titulo: "Introducción a Python",
+    estado: "disponible",
+    descripcion:
+      "Taller autoguiado para dar tus primeros pasos en Python sin experiencia previa. Corre completo en el navegador vía Google Colab, sin instalar nada. Termina con un mini-proyecto de análisis de notas que junta todo lo aprendido.",
+    nivel: "Principiante",
+    duracion: "Autoguiado (~2 h)",
+    cupos: "Sin límite",
+    objetivos: [
+      "Escribir y ejecutar tus primeros programas en Python",
+      "Usar variables, tipos de datos y operadores aritméticos/de comparación",
+      "Tomar decisiones con if / elif / else",
+      "Repetir tareas con bucles for y while",
+      "Guardar y recorrer datos con listas",
+      "Escribir funciones reutilizables",
+      "Aplicar todo lo anterior en un mini-proyecto de análisis de datos",
+    ],
+    contenidos: [
+      "Cómo usar el cuaderno",
+      "¿Qué es Python y para qué sirve?",
+      "print() y comentarios",
+      "Variables y tipos de datos",
+      "Operadores aritméticos y de comparación",
+      "input(): pedir datos al usuario",
+      "Condicionales: if / elif / else",
+      "Bucles: for y while",
+      "Listas",
+      "Funciones",
+      "Mini-proyecto: analizador de notas",
+    ],
+    enlace: "https://colab.research.google.com/drive/17AtuXQOABL0egdNq1BfZd5WY2qEkQs-S?usp=sharing",
+  },
   {
     codigo: "M08",
     titulo: "Introducción al machine learning",
